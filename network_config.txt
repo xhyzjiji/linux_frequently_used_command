@@ -1,0 +1,5 @@
+***查看eth0的mac地址***
+cat /sys/class/net/eht0/address
+
+***查看连接到本机的远端ip的mac地址***
+cat /proc/net/arp
