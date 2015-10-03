@@ -3,3 +3,6 @@ cat /sys/class/net/eht0/address
 
 ***查看连接到本机的远端ip的mac地址***
 cat /proc/net/arp
+
+***查看本机网络接口信息***
+netstat -ni

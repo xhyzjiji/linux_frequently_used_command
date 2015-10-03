@@ -1,0 +1,17 @@
+***生成ctags文件***
+ctags -I __THROW -R -f ~/Ctags_files/usr_include_tags/usr_inc_tags --languages=c,c++ --langmap=c:+.h --links=yes --c-kinds=+px --fields=+aiKSz --extra=+q /usr/include/
+如果gcc正在编译c++文件，并且gcc版本大于2.8那么__THROW会被定义 为throw()。如果正在编译c文件并且gcc版本在2.8 之前，__THROW则是一个空的宏定义，如果版本大于3.3，则__THROW被定义成一个attribute内包含的nothrow的形式。最后这个 形式表示这段c代码不会抛出异常。
+正是这个复杂的宏定义干扰了ctags，对于所有像listen这样含有 __THROW的原型，ctags一律都不能正确解析。其原因是ctags 本身不是一个编译器也没有专门的预处理器，它是通过直接解析源文件的语法来工作的，不进行语义的检查和宏展开。对于宏，它的能力仅限于识别定义、调用和简 单的条件编译的猜测。
+#加入-I __THROW是为了防止__THROW宏定义干扰ctags
+
+***查看语言与扩展名的关系***
+ctags --list-maps
+
+***将指定扩展名文件归类到指定语言***
+ctags --langmap=C:+.h  #将*.h文件归类为c语言文件
+
+***ctags快捷键***
+Ctrl+]	-->	跳转函数或变量定义处
+Ctrl+o/t--> 返回到跳转前的位置
+Ctrl+p	--> 自动补全符号
+
